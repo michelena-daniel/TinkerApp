@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  tinkerappproject:
+    image: ${DOCKER_REGISTRY-}tinkerappproject
+    build:
+      context: .
+      dockerfile: TinkerAppProject/Dockerfile
