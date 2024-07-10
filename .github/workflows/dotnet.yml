@@ -23,6 +23,6 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore ./TinkerApp.sln
     - name: Build
-      run: dotnet build TinkerApp/TinkerApp.csproj --configuration Release --no-restore
+      run: dotnet build TinkerAppProject/TinkerApp.csproj --configuration Release --no-restore
     - name: Test
       run: dotnet test ./TinkerApp.sln --configuration Release --no-restore
