@@ -9,6 +9,10 @@ services:
     ports:
      - "5000:5000"
      - "5001:5001"
+    depends_on:
+      - tinkerdb
+    networks:
+      - tinkernetwork
   tinkerdb:
     image: postgres:latest
     container_name: tinkerdb
@@ -20,3 +24,8 @@ services:
       - ./.containers/tinkerdb:/var/lib/postgressql/data
     ports:
       - 5432:5432
+    networks:
+      - tinkernetwork
+networks:
+  tinkernetwork:
+    driver: bridge
