@@ -11,18 +11,19 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
+using TinkerAppProject.Areas.Identity.Data;
 
 namespace TinkerAppProject.Areas.Identity.Pages.Account
 {
     public class LoginWith2faModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<TinkerAppProjectUser> _signInManager;
+        private readonly UserManager<TinkerAppProjectUser> _userManager;
         private readonly ILogger<LoginWith2faModel> _logger;
 
         public LoginWith2faModel(
-            SignInManager<IdentityUser> signInManager,
-            UserManager<IdentityUser> userManager,
+            SignInManager<TinkerAppProjectUser> signInManager,
+            UserManager<TinkerAppProjectUser> userManager,
             ILogger<LoginWith2faModel> logger)
         {
             _signInManager = signInManager;

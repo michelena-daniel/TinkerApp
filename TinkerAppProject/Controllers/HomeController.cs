@@ -1,25 +1,31 @@
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using TinkerAppProject.Areas.Identity.Data;
 using TinkerAppProject.Models;
 
 namespace TinkerAppProject.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
+        private UserManager<TinkerAppProjectUser> _userManager;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(UserManager<TinkerAppProjectUser> userManager, ILogger<HomeController> logger)
         {
+            _userManager = userManager;
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var user = await _userManager.GetUserAsync(User);
+            return View(user);
         }
 
-        [Authorize]
+        
         public IActionResult Privacy()
         {
             return View();

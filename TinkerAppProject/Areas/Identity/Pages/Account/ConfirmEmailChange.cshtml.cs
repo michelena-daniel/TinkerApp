@@ -10,15 +10,16 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using TinkerAppProject.Areas.Identity.Data;
 
 namespace TinkerAppProject.Areas.Identity.Pages.Account
 {
     public class ConfirmEmailChangeModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<TinkerAppProjectUser> _userManager;
+        private readonly SignInManager<TinkerAppProjectUser> _signInManager;
 
-        public ConfirmEmailChangeModel(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public ConfirmEmailChangeModel(UserManager<TinkerAppProjectUser> userManager, SignInManager<TinkerAppProjectUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;

@@ -8,17 +8,18 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using TinkerAppProject.Areas.Identity.Data;
 
 namespace TinkerAppProject.Areas.Identity.Pages.Account.Manage
 {
     public class SetPasswordModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<TinkerAppProjectUser> _userManager;
+        private readonly SignInManager<TinkerAppProjectUser> _signInManager;
 
         public SetPasswordModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            UserManager<TinkerAppProjectUser> userManager,
+            SignInManager<TinkerAppProjectUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
