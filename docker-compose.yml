@@ -6,3 +6,17 @@ services:
     build:
       context: .
       dockerfile: TinkerAppProject/Dockerfile
+    ports:
+     - "5000:5000"
+     - "5001:5001"
+  tinkerdb:
+    image: postgres:latest
+    container_name: tinkerdb
+    environment:
+      - POSTGRES_DB=tinkerdb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./.containers/tinkerdb:/var/lib/postgressql/data
+    ports:
+      - 5432:5432
