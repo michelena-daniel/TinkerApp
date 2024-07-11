@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using TinkerAppProject.Areas.Identity.Data;
 using TinkerAppProject.Data;
 
 namespace TinkerAppProject
@@ -16,7 +17,7 @@ namespace TinkerAppProject
                 options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            builder.Services.AddDefaultIdentity<TinkerAppProjectUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
             builder.Services.Configure<IdentityOptions>(options =>
@@ -52,6 +53,8 @@ namespace TinkerAppProject
             });
 
             var app = builder.Build();
+
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
