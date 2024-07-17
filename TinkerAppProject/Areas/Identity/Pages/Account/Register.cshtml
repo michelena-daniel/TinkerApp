@@ -13,13 +13,13 @@
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
             <div class="form-floating mb-3">
+                <input asp-for="Input.Name" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
                 <label asp-for="Input.Name"></label>
-                <input asp-for="Input.Name" class="form-control" />
                 <span asp-validation-for="Input.Name" class="text-danger"></span>
             </div>
             <div class="form-floating mb-3">
+                <input asp-for="Input.DOB" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
                 <label asp-for="Input.DOB"></label>
-                <input asp-for="Input.DOB" class="form-control" />
                 <span asp-validation-for="Input.DOB" class="text-danger"></span>
             </div>
             <div class="form-floating mb-3">
@@ -28,13 +28,21 @@
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
             <div class="form-floating mb-3">
-                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                <label asp-for="Input.Password">Password</label>
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="bi bi-eye-fill" onclick="showPassword('pass')" id="eye-icon-pass"></i></span>
+                    </div>
+                    <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Password" id="password-input" />
+                </div>
+                <span asp-validation-for="Input.Password" class="text-danger"></span>            
             </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                <label asp-for="Input.ConfirmPassword">Confirm Password</label>
+            <div class="form-floating mb-3 password-field">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="bi bi-eye-fill" onclick="showPassword('confirm')" id="eye-icon-confirm"></i></span>
+                    </div>
+                    <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Confirm Password" id="confirm-input" />
+                </div>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
             <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
@@ -49,8 +57,9 @@
                 {
                     <div>
                         <p>
-                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
-                            about setting up this ASP.NET application to support logging in via external services</a>.
+                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">
+                            article about setting up this ASP.NET application to support logging in via external services</a>.
+                                                
                         </p>
                     </div>
                 }
@@ -74,4 +83,30 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript">
+        function showPassword(passtype) {
+            var input = document.getElementById("password-input");
+            if(passtype == "confirm"){
+                input = document.getElementById("confirm-input");
+                var eyeIconConfirm = document.getElementById("eye-icon-confirm");
+                if (eyeIconConfirm.className == "bi bi-eye-slash") {
+                    eyeIconConfirm.className = "bi bi-eye-fill";
+                } else {
+                    eyeIconConfirm.className = "bi bi-eye-slash";
+                }
+            } else if(passtype == "pass") {
+                var eyeIconPass = document.getElementById("eye-icon-pass");
+                if (eyeIconPass.className == "bi bi-eye-slash") {
+                    eyeIconPass.className = "bi bi-eye-fill";
+                } else {
+                    eyeIconPass.className = "bi bi-eye-slash";
+                }
+            }
+            if (input.type === "password") {
+                input.type = "text";
+            } else {
+                input.type = "password";
+            }
+        }
+    </script>
 }
