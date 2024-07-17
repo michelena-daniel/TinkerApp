@@ -30,7 +30,7 @@
             <div class="form-floating mb-3">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="bi bi-eye-fill" onclick="showPassword('pass')" id="eye-icon-pass"></i></span>
+                        <span class="input-group-text"><i class="bi bi-eye-fill toggle-password" data-target="password-input" id="eye-icon-pass"></i></span>
                     </div>
                     <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Password" id="password-input" />
                 </div>
@@ -39,7 +39,7 @@
             <div class="form-floating mb-3 password-field">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="bi bi-eye-fill" onclick="showPassword('confirm')" id="eye-icon-confirm"></i></span>
+                        <span class="input-group-text"><i class="bi bi-eye-fill toggle-password" data-target="confirm-input" id="eye-icon-confirm"></i></span>
                     </div>
                     <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Confirm Password" id="confirm-input" />
                 </div>
@@ -83,5 +83,14 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll(".toggle-password").forEach(function (eyeIcon) {
+                eyeIcon.addEventListener("click", function () {
+                    showPassword(this);
+                });
+            });
+        });
+    </script>
     <script type="text/javascript" src="~/js/site.js"></script>
 }
