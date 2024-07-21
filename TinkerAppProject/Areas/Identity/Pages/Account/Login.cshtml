@@ -19,8 +19,12 @@
                     <span asp-validation-for="Input.Email" class="text-danger"></span>
                 </div>
                 <div class="form-floating mb-3">
-                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
-                    <label asp-for="Input.Password" class="form-label">Password</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="bi bi-eye-fill toggle-password" data-target="password-input"></i></span>
+                        </div>
+                        <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="Password" id="password-input" />
+                    </div>
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
                 <div class="checkbox mb-3">
@@ -80,4 +84,14 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll(".toggle-password").forEach(function (eyeIcon) {
+                eyeIcon.addEventListener("click", function () {
+                    showPassword(this);
+                });
+            });
+        });
+    </script>
+    <script type="text/javascript" src="~/js/site.js"></script>
 }

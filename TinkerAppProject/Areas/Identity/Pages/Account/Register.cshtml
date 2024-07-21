@@ -30,7 +30,7 @@
             <div class="form-floating mb-3">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="bi bi-eye-fill" onclick="showPassword('pass')" id="eye-icon-pass"></i></span>
+                        <span class="input-group-text"><i class="bi bi-eye-fill toggle-password" data-target="password-input"></i></span>
                     </div>
                     <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Password" id="password-input" />
                 </div>
@@ -39,7 +39,7 @@
             <div class="form-floating mb-3 password-field">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="bi bi-eye-fill" onclick="showPassword('confirm')" id="eye-icon-confirm"></i></span>
+                        <span class="input-group-text"><i class="bi bi-eye-fill toggle-password" data-target="confirm-input"></i></span>
                     </div>
                     <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Confirm Password" id="confirm-input" />
                 </div>
@@ -84,29 +84,13 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <script type="text/javascript">
-        function showPassword(passtype) {
-            var input = document.getElementById("password-input");
-            if(passtype == "confirm"){
-                input = document.getElementById("confirm-input");
-                var eyeIconConfirm = document.getElementById("eye-icon-confirm");
-                if (eyeIconConfirm.className == "bi bi-eye-slash") {
-                    eyeIconConfirm.className = "bi bi-eye-fill";
-                } else {
-                    eyeIconConfirm.className = "bi bi-eye-slash";
-                }
-            } else if(passtype == "pass") {
-                var eyeIconPass = document.getElementById("eye-icon-pass");
-                if (eyeIconPass.className == "bi bi-eye-slash") {
-                    eyeIconPass.className = "bi bi-eye-fill";
-                } else {
-                    eyeIconPass.className = "bi bi-eye-slash";
-                }
-            }
-            if (input.type === "password") {
-                input.type = "text";
-            } else {
-                input.type = "password";
-            }
-        }
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll(".toggle-password").forEach(function (eyeIcon) {
+                eyeIcon.addEventListener("click", function () {
+                    showPassword(this);
+                });
+            });
+        });
     </script>
+    <script type="text/javascript" src="~/js/site.js"></script>
 }
