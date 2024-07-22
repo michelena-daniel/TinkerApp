@@ -24,3 +24,23 @@ body {
 .blue-palette {
     background-color:midnightblue !important;
 }
+
+.custom-card {
+    color: black;
+    margin: 20px;
+    outline: solid 2px rgb(255, 189, 240);
+    border-radius: 1rem;
+    background-image: url(../lib/img/money-vec.png);
+    background-repeat: no-repeat;
+    font-weight: bold !important;
+}
+
+    .custom-card:hover {
+        transform: scale(1.1);
+        transition: all 0.3s ease;
+        background-color: rgb(25, 25, 112, 0,99);
+        color: white;
+        outline: solid 3px black;
+        filter: brightness(1.1);
+    }
+}
