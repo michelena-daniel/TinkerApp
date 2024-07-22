@@ -11,6 +11,9 @@ Tech Stack:
 How to RUN (requires Docker):
 
 - Download/Clone the project from GitHub
+```
+https://github.com/michelena-daniel/TinkerApp.git
+```
 - Run docker compose to spin up the containers (from root directory where the compose .yml is located):
 ```
 docker compose up
