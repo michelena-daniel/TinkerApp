@@ -2,6 +2,7 @@
 
 Tech Stack:
 
+- .NET 8 following MVC pattern
 - EF Core with Identity to handle persistence, users and DB migrations
 - Docker to add orchestration support and containerize tools on compose.yaml
 - Postgres 16 image as DB
@@ -11,6 +12,9 @@ Tech Stack:
 How to RUN (requires Docker):
 
 - Download/Clone the project from GitHub
+```
+https://github.com/michelena-daniel/TinkerApp.git
+```
 - Run docker compose to spin up the containers (from root directory where the compose .yml is located):
 ```
 docker compose up
