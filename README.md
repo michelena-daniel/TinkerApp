@@ -2,6 +2,7 @@
 
 Tech Stack:
 
+- .NET 8 following MVC pattern
 - EF Core with Identity to handle persistence, users and DB migrations
 - Docker to add orchestration support and containerize tools on compose.yaml
 - Postgres 16 image as DB
