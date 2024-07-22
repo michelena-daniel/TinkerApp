@@ -1,0 +1,50 @@
+﻿@using TinkerAppProject.Models
+@model ExpensesViewModel
+
+@{
+    ViewData["Title"] = "Expenses";
+}
+<!DOCTYPE html>
+<html>
+<body>
+    <div class="container">
+        <div class="row">
+            <form class="col">
+                <div class="input-group mb-3">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-success my-2 my-sm-0 input-group-text" type="submit" id="basic-addon2">Search</button>
+                    </div>
+                </div>
+            </form>
+            <div class="col">
+                <button type="button" class="btn btn-success">Add New Expense</button>
+            </div>
+        </div>
+        <div>
+            @if (Model != null && Model.Expenses.Any())
+            {
+                <div class="row">
+                    @foreach (var expense in Model.Expenses)
+                    {
+                        <div class="card custom-card text-dark" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">@expense.Concept</h5>
+                                <h6 class="card-subtitle mb-2">Amount paid: @expense.AmountPaid</h6>
+                                <h7 class="card-subtitle mb-2">Category: @expense.Category</h7>
+                                <p class="card-text">Your description lorem ipsum lorem ipsum. Lorem ipsum lorem ipsum.</p>
+                                <a href="#" class="card-link">Edit Expense</a>
+                                <a href="#" class="card-link">Delete Expense</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p>You don't have any records saved yet, try creating a new expense record'</p>
+            }
+        </div>
+        </div>
+</body>
+</html>
