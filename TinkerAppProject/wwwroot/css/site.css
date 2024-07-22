@@ -20,3 +20,7 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.blue-palette {
+    background-color:midnightblue !important;
+}
