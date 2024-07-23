@@ -17,7 +17,7 @@ namespace TinkerAppProject.Controllers
                 var expense = new ExpenseModel
                 {
                     Id = i,
-                    UserId = i,
+                    UserId = i.ToString(),
                     UserName = "UserNameTest",
                     Concept = $"Test {i}",
                     Category = (CategoryEnum)categoryValues.GetValue(random.Next(categoryValues.Length)),

@@ -12,8 +12,8 @@ using TinkerAppProject.Data;
 namespace TinkerAppProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240711112142_loginset")]
-    partial class loginset
+    [Migration("20240723004721_Create_Expense_Table")]
+    partial class Create_Expense_Table
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -231,6 +231,45 @@ namespace TinkerAppProject.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("TinkerAppProject.Models.ExpenseModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AmountPaid")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Category")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Concept")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("DayPaid")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("DayRegistered")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Expense");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -280,6 +319,22 @@ namespace TinkerAppProject.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("TinkerAppProject.Models.ExpenseModel", b =>
+                {
+                    b.HasOne("TinkerAppProject.Areas.Identity.Data.TinkerAppProjectUser", "User")
+                        .WithMany("Expenses")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("TinkerAppProject.Areas.Identity.Data.TinkerAppProjectUser", b =>
+                {
+                    b.Navigation("Expenses");
                 });
 #pragma warning restore 612, 618
         }

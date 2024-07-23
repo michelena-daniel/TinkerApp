@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using TinkerAppProject.Models;
 
 namespace TinkerAppProject.Areas.Identity.Data;
 
@@ -9,5 +10,6 @@ public class TinkerAppProjectUser : IdentityUser
     public string? Name { get; set; }
     [PersonalData]
     public DateTime DOB { get; set; }
+    public List<ExpenseModel> Expenses { get; set; } = [];
 }
 
