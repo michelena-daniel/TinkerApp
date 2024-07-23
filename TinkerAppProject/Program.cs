@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Net.Mail;
 using TinkerAppProject.Areas.Identity.Data;
 using TinkerAppProject.Data;
+using TinkerAppProject.Repositories;
 
 namespace TinkerAppProject
 {
@@ -51,6 +53,9 @@ namespace TinkerAppProject
                 options.AccessDeniedPath = "/Identity/Account/AccessDenied";
                 options.SlidingExpiration = true;
             });
+
+            //Register own services
+            builder.Services.AddTransient<IExpenseRepository, ExpenseRepository>();
 
             var app = builder.Build();
 

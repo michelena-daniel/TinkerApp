@@ -1,0 +1,50 @@
+﻿@using TinkerAppProject.Models
+@model ExpenseModel
+
+@{
+    ViewData["Title"] = "Create Expense";
+}
+
+<!DOCTYPE html>
+<html>
+<body>
+    <div class="row">
+        <div class="col">
+            <h1>Create new expense:</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            @using (Html.BeginForm("CreateExpense", "Expenses"))
+            {
+                <div class="form-floating mb-3">
+                    <input asp-for="@Model.Concept" class="form-control" type="text" id="concept">
+                    <label asp-for="@Model.Concept">Concept</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <p>Category: </p>
+                    @Html.DropDownListFor(o => o.Category, Enum.GetValues(typeof(CategoryEnum)).Cast<CategoryEnum>().Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() }))
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="@Model.AmountPaid" class="form-control" type="text" id="amount">
+                    <label asp-for="@Model.AmountPaid">Amount Paid</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input input asp-for="@Model.DayPaid" type="date" class="form-control" id="date">
+                    <label for="date">Date</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <button class="btn btn-primary" type="submit">Save</button>
+                </div>                
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <form asp-controller="Expenses" asp-action="Index" method="post">
+                <button type="submit" class="btn btn-secondary">Back</button>
+            </form>
+        </div>        
+    </div>
+</body>
+</html>
