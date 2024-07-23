@@ -36,7 +36,7 @@
                                 <h7 class="card-subtitle mb-2">Category: @expense.Category</h7>
                                 <p class="card-text">Your description lorem ipsum lorem ipsum. Lorem ipsum lorem ipsum.</p>
                                 <a href="#" class="card-link">Edit Expense</a>
-                                <a href="#" class="card-link">Delete Expense</a>
+                                @Html.ActionLink("Delete Expense", "DeleteExpense", "Expenses", new { expenseGuid = @expense.Id })
                             </div>
                         </div>
                     }

@@ -8,6 +8,7 @@ namespace TinkerAppProject.Repositories
     {
         Task<List<ExpenseModel>> GetAllExpensesByUser(string userId);
         Task<int> CreateExpense(ExpenseModel expense);
+        Task<int> DeleteExpense(Guid expenseGuid);
 
     }
     public class ExpenseRepository : IExpenseRepository
@@ -27,6 +28,11 @@ namespace TinkerAppProject.Repositories
         {
             await _dbContext.Expense.AddAsync(expense);
             return await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<int> DeleteExpense(Guid expenseGuid)
+        {
+            return await _dbContext.Expense.Where(e => e.Id == expenseGuid).ExecuteDeleteAsync();
         }
     }
 }

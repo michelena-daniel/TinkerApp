@@ -10,8 +10,8 @@ namespace TinkerAppProject.Controllers
     [Authorize]
     public class ExpensesController : Controller
     {
-        private IExpenseRepository _expenseRepository;
-        private UserManager<TinkerAppProjectUser> _userManager;
+        private readonly IExpenseRepository _expenseRepository;
+        private readonly UserManager<TinkerAppProjectUser> _userManager;
 
         public ExpensesController(IExpenseRepository expenseRepository, UserManager<TinkerAppProjectUser> userManager)
         {
@@ -44,24 +44,33 @@ namespace TinkerAppProject.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateExpense(ExpenseModel model)
         {
-            Random random = new Random();
-            var user = await _userManager.GetUserAsync(User);
-            model.UserId = user.Id;
-            model.UserName = user.UserName;
-            model.User = user;
-            model.DayPaid = DateTime.Now;
-            model.Id = random.Next(1,1000);
-            var response = await _expenseRepository.CreateExpense(model);
-
-            if(response == 1)
+            if (!ModelState.IsValid)
             {
-                return View("CreateExpenseSuccess");
+                return View("Index");
+            }
+
+            var user = await _userManager.GetUserAsync(User);
+
+            if(user != null)
+            {
+                model.UserId = user.Id;
+                model.UserName = user.UserName;
+                model.User = user;
+                model.DayPaid = DateTime.Now;
             }
             else
             {
-                return View("CreateExpenseError");
-            }
-            
+                return View("Index");
+            }            
+            var response = await _expenseRepository.CreateExpense(model);
+
+            return response == 1 ? View("CreateExpenseSuccess") : View("CreateExpenseError");
+        }
+        
+        public IActionResult DeleteExpense(Guid expenseGuid)
+        {
+            _expenseRepository.DeleteExpense(expenseGuid);
+            return RedirectToAction("Index");
         }
     }
 }
