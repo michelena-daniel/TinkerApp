@@ -1,0 +1,49 @@
+﻿@using TinkerAppProject.Models
+@model ExpenseModel
+
+@{
+    ViewData["Title"] = "Create Expense";
+}
+
+<!DOCTYPE html>
+<html>
+<body>
+    <div class="row">
+        <div class="col">
+            <h1>Create new expense:</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            @using (Html.BeginForm("CreateExpense", "Expenses"))
+            {
+                <div class="form-floating mb-3">
+                    <input asp-for="@Model.Concept" class="form-control" type="text" id="concept" required>
+                    <label asp-for="@Model.Concept">Concept</label>
+                </div>                
+                <div class="form-floating mb-3">
+                    <input asp-for="@Model.AmountPaid" class="form-control" type="number" id="amount" onfocus="this.value=''">
+                    <label asp-for="@Model.AmountPaid">Amount Paid</label>
+                    <span asp-validation-for="@Model.AmountPaid" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input input asp-for="@Model.DayPaid" type="date" class="form-control" id="date">
+                    <label asp-for="@Model.DayPaid">Date</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <p>Category: </p>
+                    @Html.DropDownListFor(o => o.Category, Enum.GetValues(typeof(CategoryEnum)).Cast<CategoryEnum>().Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() }))
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button class="btn btn-primary" type="submit">Save</button>
+                    </div>
+                    <div class="col">
+                        @Html.ActionLink("Return", "Index", "Expenses", null, new { @class = "btn btn-secondary" })
+                    </div>
+                </div>            
+            }
+        </div>
+    </div>
+</body>
+</html>
