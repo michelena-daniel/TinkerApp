@@ -1,4 +1,5 @@
-﻿using TinkerAppProject.Areas.Identity.Data;
+﻿using System.ComponentModel.DataAnnotations;
+using TinkerAppProject.Areas.Identity.Data;
 
 namespace TinkerAppProject.Models
 {
@@ -9,6 +10,7 @@ namespace TinkerAppProject.Models
         public string? UserName { get; set; }
         public string? Concept { get; set; }
         public CategoryEnum Category { get; set; }
+        [Range(1, int.MaxValue)]
         public int AmountPaid { get; set; }
         public DateTime DayPaid { get; set; }
         public DateTime DayRegistered { get; set; }
