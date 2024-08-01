@@ -39,6 +39,19 @@ You can now open the application on your localhost, but any login or register at
   dotnet ef database update
   ```
   - Once migrations are applied you can change the appsettings back to the docker host and spin it up again when needed using docker commands.
+
+External Login using Google:
+
+Google external login is setup and ready, but it'll need a generated ClientID on their side to fill the appsettings.json:
+```
+"GoogleClient": {
+    "ClientId": "clientidplaceholder",
+    "ClientSecret": "clientsecretplaceholder"
+  }
+```
+You can create a new client on: https://developers.google.com/identity/sign-in/web/sign-in
+
+
   
 
 
