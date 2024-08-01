@@ -1,6 +1,6 @@
 # TinkerApp
 
-Tech Stack:
+## Tech Stack:<a name="tech-Stack"/>
 
 - .NET 8 following MVC pattern
 - EF Core with Identity to handle persistence, users and DB migrations
@@ -9,7 +9,7 @@ Tech Stack:
 - Bootstrap 5 for UI design
 - Chart.js via CDN to manage graph drawing
 
-How to RUN (requires Docker):
+## How to RUN (requires Docker):
 
 - Download/Clone the project from GitHub
 ```
@@ -40,7 +40,7 @@ You can now open the application on your localhost, but any login or register at
   ```
   - Once migrations are applied you can change the appsettings back to the docker host and spin it up again when needed using docker commands.
 
-External Login using Google:
+## External Login using Google: <a name="google"/>
 
 Google external login is setup and ready, but it'll need a generated ClientID on their side to fill the appsettings.json:
 ```
