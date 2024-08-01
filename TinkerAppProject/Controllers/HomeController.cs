@@ -10,7 +10,7 @@ namespace TinkerAppProject.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-        private UserManager<TinkerAppProjectUser> _userManager;
+        private readonly UserManager<TinkerAppProjectUser> _userManager;
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(UserManager<TinkerAppProjectUser> userManager, ILogger<HomeController> logger)
@@ -21,8 +21,20 @@ namespace TinkerAppProject.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var user = await _userManager.GetUserAsync(User);
-            return View(user);
+            try
+            {
+                var user = await _userManager.GetUserAsync(User);
+
+                if (user.Name == null)
+                {
+                    user.Name = user.UserName;
+                }
+                return View(user);
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         
