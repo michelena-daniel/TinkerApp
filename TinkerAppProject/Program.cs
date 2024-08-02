@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TinkerAppProject.Areas.Identity.Data;
 using TinkerAppProject.Data;
+using TinkerAppProject.Models.Mail;
 using TinkerAppProject.Repositories;
 
 namespace TinkerAppProject
@@ -62,6 +63,9 @@ namespace TinkerAppProject
                     options.ClientId = googleAuthNSection["ClientId"];
                     options.ClientSecret = googleAuthNSection["ClientSecret"];
                 });
+
+            builder.Services.Configure<MailAuthOptions>
+                (builder.Configuration.GetSection(MailAuthOptions.MailOptions));
 
             //Register own services
             builder.Services.AddTransient<IExpenseRepository, ExpenseRepository>();
