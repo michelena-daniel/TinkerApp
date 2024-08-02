@@ -25,7 +25,7 @@ namespace TinkerAppProject.Services.Mail
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()
             {
-                From = new EmailAddress("Joe@contoso.com", "Password Recovery"),
+                From = new EmailAddress("tinkerapplicationmail@gmail.com", "Tinker Application"),
                 Subject = subject,
                 PlainTextContent = message,
                 HtmlContent = message
