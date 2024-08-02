@@ -1,105 +1,26 @@
-﻿<!DOCTYPE html>
+﻿@using TinkerAppProject.Models.Charting
+@model ChartModel
+
+@{
+    ViewData["Title"] = "Chart Index";
+}
+
+<!DOCTYPE html>
 <html>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col" style="max-height: 300px;">
-                <label>Bar Chart</label>
-                <canvas id="barChart"></canvas>
-            </div>
-            <div class="col" style="max-height: 300px;">
-                <label>Doughnut Chart</label>
-                <canvas id="donutChart"></canvas>
-            </div>
-            <div class="col" style="max-height: 300px">
-                <label>Radar Chart</label>
-                <canvas id="radarChart"></canvas>
-            </div>
+    <div class="row">
+        <div class="col">
+            @using (Html.BeginForm("GenerateChart", "Charting"))
+            {
+                <div class="form-floating mb-3">
+                    <p>Chart type: </p>
+                    @Html.DropDownListFor(c => c.Type, Enum.GetValues(typeof(ChartTypeEnum)).Cast<ChartTypeEnum>().Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() }))
+                </div>
+                <div class="form-floating mb-3">
+                    <button class="btn btn-primary" type="submit">Generate</button>
+                </div>
+            }
         </div>
-    </div>
+    </div>    
 </body>
 </html>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<script>
-    const bar = document.getElementById('barChart');
-    const donut = document.getElementById('donutChart');
-    const radar = document.getElementById('radarChart');
-
-    new Chart(bar, {
-        type: 'bar',
-        data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-
-    new Chart(donut, {
-        type: 'doughnut',
-        data: {
-            datasets: [{
-                data: [10, 20, 30]
-            }],
-            labels: [
-                'Red',
-                'Yellow',
-                'Blue'
-            ]
-        }
-    });
-
-    new Chart(radar, {
-        type: 'radar',
-        data: {
-            labels: [
-                'Eating',
-                'Drinking',
-                'Sleeping',
-                'Designing',
-                'Coding',
-                'Cycling',
-                'Running'
-            ],
-            datasets: [{
-                label: 'My First Dataset',
-                data: [65, 59, 90, 81, 56, 55, 40],
-                fill: true,
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                borderColor: 'rgb(255, 99, 132)',
-                pointBackgroundColor: 'rgb(255, 99, 132)',
-                pointBorderColor: '#fff',
-                pointHoverBackgroundColor: '#fff',
-                pointHoverBorderColor: 'rgb(255, 99, 132)'
-            }, {
-                label: 'My Second Dataset',
-                data: [28, 48, 40, 19, 96, 27, 100],
-                fill: true,
-                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                borderColor: 'rgb(54, 162, 235)',
-                pointBackgroundColor: 'rgb(54, 162, 235)',
-                pointBorderColor: '#fff',
-                pointHoverBackgroundColor: '#fff',
-                pointHoverBorderColor: 'rgb(54, 162, 235)'
-            }]
-        },
-        options: {
-            elements: {
-                line: {
-                    borderWidth: 3
-                }
-            }
-        },
-    });
-</script>

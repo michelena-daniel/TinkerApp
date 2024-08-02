@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TinkerAppProject.Models.Charting;
 
 namespace TinkerAppProject.Controllers
 {
@@ -9,6 +10,11 @@ namespace TinkerAppProject.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult GenerateChart(ChartModel model)
+        {
+            return View(model);
         }
     }
 }

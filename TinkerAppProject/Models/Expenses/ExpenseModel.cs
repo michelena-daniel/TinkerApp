@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using TinkerAppProject.Areas.Identity.Data;
 
-namespace TinkerAppProject.Models
+namespace TinkerAppProject.Models.Expenses
 {
     public class ExpenseModel
     {
