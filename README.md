@@ -8,6 +8,7 @@
 - Postgres 16 image as DB
 - Bootstrap 5 for UI design
 - Chart.js via CDN to manage graph drawing
+- SendGrid to manage mail.
 
 ## How to RUN (requires Docker):
 
