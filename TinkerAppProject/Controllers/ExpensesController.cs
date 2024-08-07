@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TinkerAppProject.Areas.Identity.Data;
 using TinkerAppProject.Models;
+using TinkerAppProject.Models.Expenses;
 using TinkerAppProject.Repositories;
 
 namespace TinkerAppProject.Controllers

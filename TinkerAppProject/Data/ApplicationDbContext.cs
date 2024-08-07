@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using TinkerAppProject.Areas.Identity.Data;
-using TinkerAppProject.Models;
+using TinkerAppProject.Models.Expenses;
 
 namespace TinkerAppProject.Data
 {
