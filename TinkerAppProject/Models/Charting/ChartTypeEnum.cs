@@ -2,8 +2,8 @@
 {
     public enum ChartTypeEnum
     {
-        Bar,
-        Doughnut,
-        Radar
+        Bar = 1,
+        Doughnut = 2,
+        Radar = 3
     }
 }

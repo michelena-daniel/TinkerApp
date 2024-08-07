@@ -5,6 +5,26 @@
     ViewData["Title"] = "Chart Index";
 }
 
+<script>
+    function chartSelect(chartType) {
+        document.getElementById('additionalContent').style.display = '';
+
+        if (chartType == 1) {
+            document.getElementById('barOptions').style.display = '';
+            document.getElementById('doughnoutOptions').style.display = 'none';
+            document.getElementById('radarOptions').style.display = 'none';
+        } else if (chartType == 2) {
+            document.getElementById('doughnoutOptions').style.display = '';
+            document.getElementById('barOptions').style.display = 'none';
+            document.getElementById('radarOptions').style.display = 'none';
+        } else if (chartType == 3) {
+            document.getElementById('radarOptions').style.display = '';
+            document.getElementById('doughnoutOptions').style.display = 'none';
+            document.getElementById('barOptions').style.display = 'none';
+        }
+    }
+</script>
+
 <!DOCTYPE html>
 <html>
 <body>
@@ -12,11 +32,20 @@
         <div class="col">
             @using (Html.BeginForm("GenerateChart", "Charting"))
             {
-                <div class="form-floating mb-3">
-                    <p>Chart type: </p>
-                    @Html.DropDownListFor(c => c.Type, Enum.GetValues(typeof(ChartTypeEnum)).Cast<ChartTypeEnum>().Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() }))
+                <div class="form-floating mb-3">                    
+                    <p>Chart type: </p>                    
+                    @Html.DropDownListFor(c => c.Type, Enum.GetValues(typeof(ChartTypeEnum)).Cast<ChartTypeEnum>().Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() }), new { @onchange = "chartSelect(this.value)"})
                 </div>
-                <div class="form-floating mb-3">
+                <div class="form-floating mb-3" id="additionalContent" style="display:none">
+                    <div id="barOptions" style="display:none">
+                        Bar options
+                    </div>
+                    <div id="doughnoutOptions" style="display:none">
+                        Donut options
+                    </div>
+                    <div id="radarOptions" style="display:none">
+                        Radar options
+                    </div>
                     <button class="btn btn-primary" type="submit">Generate</button>
                 </div>
             }
