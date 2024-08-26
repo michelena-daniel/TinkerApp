@@ -27,11 +27,12 @@ namespace TinkerAppProject.Services.Charting
             {
                 var expenses = await _expenseRepository.GetAllExpensesByUser(userId);
                 var startDate = DateTime.Now.AddMonths(-model.MonthRange + 1);
+
                 response.Dataset = Enumerable.Range(0, model.MonthRange)
                         .Select(i => new { Year = startDate.AddMonths(i) })
                         .OrderByDescending(i => i.Year)
                         .ThenByDescending(i => i.Year.Month)
-                        .Select(i => expenses.Where(e => e.DayPaid.Month == i.Year.Month)
+                        .Select(i => expenses.Where(e => e.DayPaid.Month == i.Year.Month && e.DayPaid.Year == i.Year.Year)
                         .Select(e => e.AmountPaid)
                         .Sum())
                         .ToList();
