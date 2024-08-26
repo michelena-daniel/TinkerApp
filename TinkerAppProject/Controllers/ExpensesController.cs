@@ -73,7 +73,6 @@ namespace TinkerAppProject.Controllers
                 model.UserId = user.Id;
                 model.UserName = user.UserName;
                 model.User = user;
-                model.DayPaid = DateTime.Now;
                 response = await _expenseRepository.CreateExpense(model);
             }
             catch(Exception ex)

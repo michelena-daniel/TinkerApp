@@ -5,6 +5,7 @@ using TinkerAppProject.Areas.Identity.Data;
 using TinkerAppProject.Data;
 using TinkerAppProject.Models.Mail;
 using TinkerAppProject.Repositories;
+using TinkerAppProject.Services.Charting;
 using TinkerAppProject.Services.Mail;
 
 namespace TinkerAppProject
@@ -73,6 +74,7 @@ namespace TinkerAppProject
 
             //Register own services
             builder.Services.AddTransient<IExpenseRepository, ExpenseRepository>();
+            builder.Services.AddScoped<IChartGenerationService, ChartGenerationService>();
 
             var app = builder.Build();
 

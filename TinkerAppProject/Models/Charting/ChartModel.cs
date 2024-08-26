@@ -3,7 +3,7 @@
     public class ChartModel
     {
         public ChartTypeEnum Type { get; set; }
-        public List<string> Labels { get; set; } = [];
-        public List<int> Dataset { get; set; } = [];
+        public int MonthRange { get; set; }
+        public LabelTypeEnum LabelType { get; set; }
     }
 }

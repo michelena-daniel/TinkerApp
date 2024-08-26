@@ -32,13 +32,18 @@
         <div class="col">
             @using (Html.BeginForm("GenerateChart", "Charting"))
             {
-                <div class="form-floating mb-3">                    
-                    <p>Chart type: </p>                    
+                <div class="form-floating mb-3">
                     @Html.DropDownListFor(c => c.Type, Enum.GetValues(typeof(ChartTypeEnum)).Cast<ChartTypeEnum>().Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() }), new { @onchange = "chartSelect(this.value)"})
                 </div>
                 <div class="form-floating mb-3" id="additionalContent" style="display:none">
                     <div id="barOptions" style="display:none">
-                        Bar options
+                        <div class="form-floating mb-3">
+                            <input asp-for="@Model.MonthRange" class="form-control" type="number" required>
+                            <label asp-for="@Model.MonthRange">Month Range</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            @Html.DropDownListFor(c => c.LabelType, Enum.GetValues(typeof(LabelTypeEnum)).Cast<LabelTypeEnum>().Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() }))
+                        </div>
                     </div>
                     <div id="doughnoutOptions" style="display:none">
                         Donut options

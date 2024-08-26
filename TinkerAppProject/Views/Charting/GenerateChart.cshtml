@@ -1,5 +1,6 @@
-﻿@using TinkerAppProject.Models.Charting
-@model ChartModel
+﻿@using System.Text.Json
+@using TinkerAppProject.Models.Charting
+@model ChartResponse
 
 @{
     ViewData["Title"] = "Generate Chart";
@@ -20,13 +21,14 @@
             </div>
             <script>
                 const bar = document.getElementById('barChart');
+                var model = @Html.Raw(JsonSerializer.Serialize(Model));
                 new Chart(bar, {
                     type: 'bar',
                     data: {
-                        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                        labels: model.Labels,
                         datasets: [{
-                            label: '# of Votes',
-                            data: [12, 19, 3, 5, 2, 3],
+                            label: '# of '+model.LabelType,
+                            data: model.Dataset,
                             borderWidth: 1
                         }]
                     },
