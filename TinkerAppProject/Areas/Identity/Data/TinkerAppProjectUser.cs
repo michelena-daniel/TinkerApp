@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using TinkerAppProject.Models;
+using TinkerAppProject.Models.Expenses;
 
 namespace TinkerAppProject.Areas.Identity.Data;
 

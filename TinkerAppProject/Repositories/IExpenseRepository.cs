@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TinkerAppProject.Data;
-using TinkerAppProject.Models;
+using TinkerAppProject.Models.Expenses;
 
 namespace TinkerAppProject.Repositories
 {

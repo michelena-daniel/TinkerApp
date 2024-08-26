@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TinkerAppProject.Areas.Identity.Data;
 using TinkerAppProject.Models;
+using TinkerAppProject.Models.Expenses;
 using TinkerAppProject.Repositories;
 
 namespace TinkerAppProject.Controllers
@@ -72,7 +73,6 @@ namespace TinkerAppProject.Controllers
                 model.UserId = user.Id;
                 model.UserName = user.UserName;
                 model.User = user;
-                model.DayPaid = DateTime.Now;
                 response = await _expenseRepository.CreateExpense(model);
             }
             catch(Exception ex)

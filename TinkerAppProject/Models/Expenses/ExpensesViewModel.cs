@@ -1,4 +1,4 @@
-﻿namespace TinkerAppProject.Models
+﻿namespace TinkerAppProject.Models.Expenses
 {
     public class ExpensesViewModel
     {
