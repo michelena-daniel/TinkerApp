@@ -28,7 +28,7 @@
                         <label id="monthRangeLabel" asp-for="@Model.MonthRange">Month Range</label>
                         <span asp-validation-for="@Model.MonthRange" class="text-danger"></span>
                     </div>
-                    <div id="barOptions" style="display:none">
+                    <div class="form-floating mb-3">
                         @Html.DropDownListFor(c => c.LabelType, Enum.GetValues(typeof(LabelTypeEnum)).Cast<LabelTypeEnum>().Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() }))
                     </div>
                     <button class="btn btn-primary" type="submit">Generate</button>
@@ -43,16 +43,12 @@
     function chartSelect(chartType) {
         const additionalContent = document.getElementById('additionalContent');
         const monthRangeLabel = document.getElementById('monthRangeLabel');
-        const barOptions = document.getElementById('barOptions');
         additionalContent.style.display = '';
-
-        barOptions.style.display = 'none';
 
         const chartTypeInt = parseInt(chartType, 10);
         switch (chartTypeInt) {
             case 1:
                 monthRangeLabel.textContent = 'Month Range for Bar Chart';
-                barOptions.style.display = '';
                 break;
             case 2:
                 monthRangeLabel.textContent = 'Month Range for Doughnut Chart';

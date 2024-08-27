@@ -15,7 +15,6 @@
         case "Bar":
             <div class="row">
                 <div class="col" style="max-height: 300px;">
-                    <label>Bar Chart</label>
                     <canvas id="barChart"></canvas>
                 </div>                
             </div>
@@ -45,7 +44,6 @@
         case "Doughnut":
             <div class="row">               
                 <div class="col" style="max-height: 300px;">
-                    <label>Doughnut Chart</label>
                     <canvas id="donutChart"></canvas>
                 </div>                
             </div>
@@ -62,13 +60,19 @@
                             hoverOffset: 4
                         }]
                     },
+                    options: {
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        }
+                    },
                 });
             </script>
             break;
         case "Radar":
             <div class="row">               
                 <div class="col" style="max-height: 300px">
-                    <label>Radar Chart</label>
                     <canvas id="radarChart"></canvas>
                 </div>
             </div>
