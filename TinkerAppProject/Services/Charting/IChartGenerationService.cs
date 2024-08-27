@@ -37,38 +37,8 @@ namespace TinkerAppProject.Services.Charting
                         .Sum())
                         .ToList();
             }
-
             return response;
         }
-
-        //public async Task<ChartResponse> AddBarChartInfo(ChartModel model, string? userId)
-        //{
-        //    var response = new ChartResponse
-        //    {
-        //        Type = model.Type,
-        //        Labels = GetLastMonthsSelected(model.MonthRange)
-        //    };
-
-        //    if (!String.IsNullOrEmpty(userId))
-        //    {
-        //        switch (model.LabelType)
-        //        {
-        //            case LabelTypeEnum.Amount:
-        //                var expenses = await _expenseRepository.GetAllExpensesByUser(userId);
-        //                var startDate = DateTime.Now.AddMonths(-model.MonthRange + 1);
-        //                response.Dataset = Enumerable.Range(0, model.MonthRange)
-        //                    .Select(i => new { Year = startDate.AddMonths(i) })
-        //                    .OrderByDescending(i => i.Year)
-        //                    .ThenByDescending(i => i.Year.Month)
-        //                    .Select(i => expenses.Where(e => e.DayPaid.Month == i.Year.Month).Select(e => e.AmountPaid).Sum())
-        //                    .ToList();
-        //                break;
-        //            default:
-        //                break;
-        //        }
-        //    }
-        //    return response;
-        //}
 
         private static List<string> GetLastMonthsSelected(int range)
         {
