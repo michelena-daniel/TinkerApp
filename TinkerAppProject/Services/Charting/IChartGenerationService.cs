@@ -16,12 +16,7 @@ namespace TinkerAppProject.Services.Charting
 
         public async Task<ChartResponse> GenerateChartByMonths(ChartModel model, string? userId)
         {
-            var response = new ChartResponse
-            {
-                Type = model.Type,
-                Labels = GetLastMonthsSelected(model.MonthRange),
-                LabelType = model.LabelType
-            };
+            var response = BuildBaseChart(model);
 
             if (!String.IsNullOrEmpty(userId))
             {
@@ -37,6 +32,16 @@ namespace TinkerAppProject.Services.Charting
                     .ToList();
             }
             return response;
+        }
+
+        private static ChartResponse BuildBaseChart(ChartModel model)
+        {
+            return new ChartResponse
+            {
+                Type = model.Type,
+                Labels = GetLastMonthsSelected(model.MonthRange),
+                LabelType = model.LabelType
+            };
         }
 
         private static List<string> GetLastMonthsSelected(int range)
