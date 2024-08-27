@@ -8,6 +8,7 @@ namespace TinkerAppProject.Repositories
     {
         Task<List<ExpenseModel>> GetAllExpensesByUser(string userId);
         Task<ExpenseModel> GetExpenseById(Guid expenseGuid);
+        Task<List<ExpenseModel>> GetExpensesByConceptAsync(string searchString, string userId);
         Task<int> CreateExpense(ExpenseModel expense);
         Task<int> DeleteExpense(Guid expenseGuid);
         Task<int> UpdateExpense(ExpenseModel expense);
@@ -29,6 +30,13 @@ namespace TinkerAppProject.Repositories
         public async Task<ExpenseModel> GetExpenseById(Guid expenseGuid)
         {
             return await _dbContext.Expense.SingleAsync(e => e.Id == expenseGuid);
+        }
+
+        public async Task<List<ExpenseModel>> GetExpensesByConceptAsync(string searchString, string userId)
+        {
+            return await _dbContext.Expense
+                    .Where(e => e.UserId == userId && (e.Concept == null || EF.Functions.ILike(e.Concept, $"%{searchString}%")))
+                    .ToListAsync();
         }
 
         public async Task<int> CreateExpense(ExpenseModel expense)
