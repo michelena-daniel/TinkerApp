@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TinkerAppProject.Areas.Identity.Data;
-using TinkerAppProject.Models;
 using TinkerAppProject.Models.Expenses;
 using TinkerAppProject.Repositories;
 
@@ -13,28 +12,42 @@ namespace TinkerAppProject.Controllers
     {
         private readonly IExpenseRepository _expenseRepository;
         private readonly UserManager<TinkerAppProjectUser> _userManager;
+        private readonly ILogger<ExpensesController> _logger;
 
-        public ExpensesController(IExpenseRepository expenseRepository, UserManager<TinkerAppProjectUser> userManager)
+        public ExpensesController(IExpenseRepository expenseRepository, UserManager<TinkerAppProjectUser> userManager, ILogger<ExpensesController> logger)
         {
             _expenseRepository = expenseRepository;
             _userManager = userManager;
+            _logger = logger;
         }
 
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        public async Task<IActionResult> Index(string searchString)
         {
             var expenses = new ExpensesViewModel();
             try
-            {                
+            {
                 var user = await _userManager.GetUserAsync(User);
-                var expenseList = await _expenseRepository.GetAllExpensesByUser(user.Id);
-                expenses.Expenses.AddRange(expenseList);
+
+                if (string.IsNullOrEmpty(searchString))
+                {
+                    var allExpenses = await _expenseRepository.GetAllExpensesByUser(user.Id);
+                    expenses.Expenses.AddRange(allExpenses);
+                }
+                else
+                {
+                    var filteredExpenses = await _expenseRepository.GetExpensesByConceptAsync(searchString, user.Id);
+                    expenses.Expenses.AddRange(filteredExpenses);
+                }
+
                 return View(expenses);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ViewBag.Exception = "Error loading user expenses. Message: " + ex.Message;
+                _logger.LogError(ex, "Error loading user expenses.");
                 return View("CreateExpenseError");
-            }            
+            }
         }
 
         public IActionResult CreateExpenseIndex()
@@ -77,6 +90,7 @@ namespace TinkerAppProject.Controllers
             }
             catch(Exception ex)
             {
+                _logger.LogError(ex, "Error creating new expense.");
                 ViewBag.Exception = "Error creating new expense. Message: " + ex.Message;
                 return View("CreateExpenseError");
             }
@@ -105,6 +119,7 @@ namespace TinkerAppProject.Controllers
             }
             catch(Exception ex)
             {
+                _logger.LogError(ex, "Error updating expense.");
                 ViewBag.Exception = "Error updating expense. Message: " + ex.Message;
                 return View("CreateExpenseError");
             }
