@@ -1,5 +1,3 @@
 ﻿<h1>Success</h1>
 
-<form asp-controller="Expenses" asp-action="Index" method="post">
-    <button type="submit" class="btn btn-secondary">Back</button>
-</form>
+@Html.ActionLink("Return", "Index", "Expenses", null, new { @class = "btn btn-secondary" })
