@@ -28,18 +28,7 @@ namespace TinkerAppProject.Controllers
         {
             var userId = _userManager.GetUserId(User);
             var result = new ChartResponse();
-            switch (model.Type)
-            {
-                 case ChartTypeEnum.Bar:
-                    result = await _chartGenerationService.AddBarChartInfo(model, userId);
-                        break;
-                case ChartTypeEnum.Radar:
-                        break;
-                case ChartTypeEnum.Doughnut:
-                        break;
-                default:
-                    break;
-            }
+            result = await _chartGenerationService.GenerateChartByMonths(model, userId);
             return View(result);
         }
     }

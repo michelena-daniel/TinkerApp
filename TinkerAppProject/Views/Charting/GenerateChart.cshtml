@@ -7,15 +7,14 @@
 }
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<h1>Your @Model.Type.ToString() chart</h1>
+<h1>Your @Model.LabelType.ToString() @Model.Type.ToString() chart</h1>
 
-@{
+@{    
     switch (Model.Type.ToString())
     {
         case "Bar":
             <div class="row">
                 <div class="col" style="max-height: 300px;">
-                    <label>Bar Chart</label>
                     <canvas id="barChart"></canvas>
                 </div>                
             </div>
@@ -45,31 +44,35 @@
         case "Doughnut":
             <div class="row">               
                 <div class="col" style="max-height: 300px;">
-                    <label>Doughnut Chart</label>
                     <canvas id="donutChart"></canvas>
                 </div>                
             </div>
             <script>
                 const donut = document.getElementById('donutChart');
+                var model = @Html.Raw(JsonSerializer.Serialize(Model));
                 new Chart(donut, {
                     type: 'doughnut',
                     data: {
+                        labels: model.Labels,
                         datasets: [{
-                            data: [10, 20, 30]
-                        }],
-                        labels: [
-                            'Red',
-                            'Yellow',
-                            'Blue'
-                        ]
-                    }
+                            label: model.LabelType,
+                            data: model.Dataset,
+                            hoverOffset: 4
+                        }]
+                    },
+                    options: {
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        }
+                    },
                 });
             </script>
             break;
         case "Radar":
             <div class="row">               
                 <div class="col" style="max-height: 300px">
-                    <label>Radar Chart</label>
                     <canvas id="radarChart"></canvas>
                 </div>
             </div>
